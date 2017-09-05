@@ -90,9 +90,6 @@ void MainWindow::on_graphButton_clicked() {
         activeSeries->append(i, activeData[i] - activeData[i - 1]);
     }
 
-    for (int i = 1; i < reactiveData.size(); i++) {
-        reactiveSeries->append(i, reactiveData[i] - reactiveData[i - 1]);
-    }
 
     QtCharts::QChart *activeChart = new QtCharts::QChart();
     QtCharts::QChart *reactiveChart = new QtCharts::QChart();
@@ -102,16 +99,23 @@ void MainWindow::on_graphButton_clicked() {
     activeChart->setTitle("Активні лічильники");
     activeChart->createDefaultAxes();
 
-    reactiveChart->legend()->hide();
-    reactiveChart->addSeries(activeSeries);
-    reactiveChart->setTitle("Реактивні лічильники");
-    reactiveChart->createDefaultAxes();
 
     QtCharts::QChartView *activeChartView = new QtCharts::QChartView(activeChart);
     activeChartView->setRenderHint(QPainter::Antialiasing);
     activeChartView->show();
 
+    for (int i = 1; i < reactiveData.size(); i++) {
+        reactiveSeries->append(i, reactiveData[i] - reactiveData[i - 1]);
+    }
+
+    reactiveChart->legend()->hide();
+    reactiveChart->addSeries(reactiveSeries);
+    reactiveChart->setTitle("Реактивні лічильники");
+    reactiveChart->createDefaultAxes();
+
     QtCharts::QChartView *reactiveChartView = new QtCharts::QChartView(reactiveChart);
     reactiveChartView->setRenderHint(QPainter::Antialiasing);
     reactiveChartView->show();
+
+
 }
