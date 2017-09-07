@@ -53,7 +53,7 @@ void MainWindow::addNewMeter() {
         reactiveMeterLayout->addWidget(meterView);
         break;
     case Meter::subuser:
-
+        //Do not show subuserMeters
         break;
     }
 
@@ -62,10 +62,8 @@ void MainWindow::addNewMeter() {
 }
 
 void MainWindow::on_graphButton_clicked() {
-    QtCharts::QSplineSeries *activeSeries = new QtCharts::QSplineSeries();
-    QtCharts::QSplineSeries *reactiveSeries = new QtCharts::QSplineSeries();
 
-    QVector<double> activeData(25);
+    QVector<double> activeData(25); /*Active means active-sububer*/
     QVector<double> reactiveData(25);
 
     for (auto view : m_meterViews) {
@@ -81,41 +79,58 @@ void MainWindow::on_graphButton_clicked() {
                 reactiveData[i] += tmp[i] * view->getK();
             }
             break;
-        default:
+        case Meter::subuser:
+            for(int i=0; i<tmp.size(); i++) {
+                activeData[i] -= tmp[i]*view->getK();
+            }
             break;
         }
     }
 
-    for (int i = 1; i < activeData.size(); i++) {
-        activeSeries->append(i, activeData[i] - activeData[i - 1]);
+    ChartViewer *viewer = new ChartViewer(activeData, reactiveData);
+    viewer->show();
+}
+
+void MainWindow::on_activeTableButton_clicked()
+{
+}
+
+void MainWindow::on_cumulativeTableButton_clicked()
+{
+    //TODO
+    QTableWidget *tableWidget = new QTableWidget();
+    tableWidget->setColumnCount(3);
+    tableWidget->setRowCount(25);
+
+    QVector<double> activeData(25); /*Active means active-sububer*/
+    QVector<double> reactiveData(25);
+
+    for (auto view : m_meterViews) {
+        QVector<double> tmp = view->getData();
+        switch (view->getType()) {
+        case Meter::active:
+            for (int i = 0; i < tmp.size(); i++) {
+                activeData[i] += tmp[i] * view->getK();
+            }
+            break;
+        case Meter::reactive:
+            for (int i = 0; i < tmp.size(); i++) {
+                reactiveData[i] += tmp[i] * view->getK();
+            }
+            break;
+        case Meter::subuser:
+            for(int i=0; i<tmp.size(); i++) {
+                activeData[i] -= tmp[i]*view->getK();
+            }
+            break;
+        }
     }
 
-
-    QtCharts::QChart *activeChart = new QtCharts::QChart();
-    QtCharts::QChart *reactiveChart = new QtCharts::QChart();
-
-    activeChart->legend()->hide();
-    activeChart->addSeries(activeSeries);
-    activeChart->setTitle("Активні лічильники");
-    activeChart->createDefaultAxes();
-
-
-    QtCharts::QChartView *activeChartView = new QtCharts::QChartView(activeChart);
-    activeChartView->setRenderHint(QPainter::Antialiasing);
-    activeChartView->show();
-
-    for (int i = 1; i < reactiveData.size(); i++) {
-        reactiveSeries->append(i, reactiveData[i] - reactiveData[i - 1]);
+    for(int i=0;i<24;i++) {
+        for(int j=0;j<2;j++) {
+            tableWidget->setCellWidget(i,j,new QLabel(QString::number(j?activeData[i]:reactiveData[i])));
+        }
     }
 
-    reactiveChart->legend()->hide();
-    reactiveChart->addSeries(reactiveSeries);
-    reactiveChart->setTitle("Реактивні лічильники");
-    reactiveChart->createDefaultAxes();
-
-    QtCharts::QChartView *reactiveChartView = new QtCharts::QChartView(reactiveChart);
-    reactiveChartView->setRenderHint(QPainter::Antialiasing);
-    reactiveChartView->show();
-
-
+    tableWidget->show();
 }

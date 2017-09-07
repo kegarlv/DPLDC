@@ -4,12 +4,12 @@
 #include <QMainWindow>
 #include <QtGui>
 #include <QVector>
-#include <QSplineSeries>
-#include <QChart>
-#include <QtCharts>
+#include <QTableWidget>
+#include <QLabel>
 
 #include "dialog.h"
 #include "meterviewv2.h"
+#include "chartviewer.h"
 
 namespace Ui {
 class MainWindow;
@@ -28,6 +28,10 @@ private slots:
     void addNewMeter();
 
     void on_graphButton_clicked();
+
+    void on_activeTableButton_clicked();
+
+    void on_cumulativeTableButton_clicked();
 
 private:
     Ui::MainWindow *ui;

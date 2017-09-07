@@ -28,16 +28,19 @@ SOURCES += main.cpp\
     meter.cpp \
     indexes.cpp \
     dialog.cpp \
-    meterview.cpp \
-    meterviewv2.cpp
+    meterviewv2.cpp \
+    chartviewer.cpp \
+    consumptioninfowidget.cpp
 
 HEADERS  += mainwindow.h \
     meter.h \
     indexes.h \
     dialog.h \
-    meterview.h \
-    meterviewv2.h
+    meterviewv2.h \
+    chartviewer.h \
+    consumptioninfowidget.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \
-    meterviewv2.ui
+    meterviewv2.ui \
+    consumptioninfowidget.ui

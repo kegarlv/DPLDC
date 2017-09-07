@@ -14,13 +14,13 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>30</x>
       <y>0</y>
-      <width>471</width>
-      <height>281</height>
+      <width>661</width>
+      <height>361</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -36,8 +36,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>229</width>
-            <height>242</height>
+            <width>324</width>
+            <height>320</height>
            </rect>
           </property>
          </widget>
@@ -53,8 +53,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>228</width>
-            <height>242</height>
+            <width>323</width>
+            <height>320</height>
            </rect>
           </property>
          </widget>
@@ -70,6 +70,31 @@
           <string>Додати лічильник</string>
          </property>
         </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QPushButton" name="activeTableButton">
+           <property name="text">
+            <string>Активні</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="reactiveTableButton">
+           <property name="text">
+            <string>Реактивні</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="cumulativeTableButton">
+           <property name="text">
+            <string>Зведена</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QPushButton" name="graphButton">
