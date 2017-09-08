@@ -23,6 +23,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void getMeterData(QVector<double> &activeData, QVector<double> &reactiveData);
+
 private slots:
     void on_addMeterButton_clicked();
     void addNewMeter();
@@ -32,6 +34,8 @@ private slots:
     void on_activeTableButton_clicked();
 
     void on_cumulativeTableButton_clicked();
+
+    void on_deleteMeterButton_clicked();
 
 private:
     Ui::MainWindow *ui;

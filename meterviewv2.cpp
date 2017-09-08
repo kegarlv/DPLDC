@@ -12,6 +12,7 @@ MeterViewV2::MeterViewV2(const Meter &meter, QWidget *parent) : QWidget(parent),
 
     this->setLayout(ui->horizontalLayout);
     ui->groupBox->setLayout(ui->verticalLayout);
+    connect(ui->checkBox, &QCheckBox::clicked, [this](bool isChecked) {emit meterViewChecked(isChecked);});
 }
 
 MeterViewV2::~MeterViewV2() {
@@ -20,6 +21,12 @@ MeterViewV2::~MeterViewV2() {
 
 bool MeterViewV2::isChecked() {
     return ui->checkBox->isChecked();
+}
+
+void MeterViewV2::setChecked(bool isChecked)
+{
+    ui->checkBox->setChecked(isChecked);
+    emit meterViewChecked(isChecked);
 }
 
 Meter::Type MeterViewV2::getType() {

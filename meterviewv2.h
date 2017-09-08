@@ -27,9 +27,13 @@ public:
     ~MeterViewV2();
 
     bool isChecked();
+    void setChecked(bool isChecked);
     Meter::Type getType();
     int getK() {return m_meter.k();}
     QVector<double> getData();
+
+signals:
+    void meterViewChecked(bool isChecked);
 
 private:
     Ui::MeterViewV2 *ui;

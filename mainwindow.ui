@@ -37,7 +37,7 @@
             <x>0</x>
             <y>0</y>
             <width>324</width>
-            <height>320</height>
+            <height>322</height>
            </rect>
           </property>
          </widget>
@@ -54,7 +54,7 @@
             <x>0</x>
             <y>0</y>
             <width>323</width>
-            <height>320</height>
+            <height>322</height>
            </rect>
           </property>
          </widget>
@@ -72,34 +72,23 @@
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QPushButton" name="activeTableButton">
-           <property name="text">
-            <string>Активні</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="reactiveTableButton">
-           <property name="text">
-            <string>Реактивні</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="cumulativeTableButton">
-           <property name="text">
-            <string>Зведена</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
         <widget class="QPushButton" name="graphButton">
          <property name="text">
           <string>Графіки</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="cumulativeTableButton">
+         <property name="text">
+          <string>Зведена</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="deleteMeterButton">
+         <property name="text">
+          <string>Видалити</string>
          </property>
         </widget>
        </item>

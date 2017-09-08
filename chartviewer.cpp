@@ -1,8 +1,8 @@
 #include "chartviewer.h"
 
 ChartViewer::ChartViewer(const QVector<double> &activeData, const QVector<double> &reactiveData, QWidget *parent) : QWidget(parent) {
-    m_activeSeries = new QLineSeries(this);
-    m_reactiveSeries = new QLineSeries(this);
+    m_activeSeries = new QtCharts::QLineSeries(this);
+    m_reactiveSeries = new QtCharts::QLineSeries(this);
 
     QVector<double> activeDiff, reactiveDiff;
     for (int i = 1; i < activeData.size(); i++) {
@@ -38,7 +38,7 @@ ChartViewer::ChartViewer(const QVector<double> &activeData, const QVector<double
     m_chart->addSeries(m_reactiveSeries);
     m_chart->createDefaultAxes();
 
-    (dynamic_cast<QValueAxis*>(m_chart->axisX()))->setTickCount(24);
+    (dynamic_cast<QtCharts::QValueAxis*>(m_chart->axisX()))->setTickCount(24);
     m_chartView = new QtCharts::QChartView(m_chart, this);
     m_chartView->setRenderHint(QPainter::Antialiasing);
 
@@ -59,6 +59,7 @@ ChartViewer::ChartViewer(const QVector<double> &activeData, const QVector<double
     m_mainLayout->addItem(m_consumpingInfoLayout);
 
     this->setLayout(m_mainLayout);
+    this->resize(QApplication::desktop()->screenGeometry().size());
 }
 
 ChartViewer::~ChartViewer() {
